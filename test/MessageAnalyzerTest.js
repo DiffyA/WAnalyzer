@@ -3,7 +3,7 @@
 var assert = require('assert');
 var messageAnalyzer = require("../MessageAnalyzer");
 
-describe('MessageAnalyzer tests', function() {
+describe('MessageAnalyzer test', function() {
 
     it('getMediaType()', function(done) {
 
