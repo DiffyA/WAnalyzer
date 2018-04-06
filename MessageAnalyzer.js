@@ -1,24 +1,37 @@
 "use strict";
 
-function getMediaType(message) {
-    var msg = JSON.parse(message);
-    var type = 'text';
+function MessageAnalyzer() {}
 
-    if (msg['content'] !== '') {
+MessageAnalyzer.prototype.getMediaType = function(message) {
 
-        if (msg['content'].trim() === '<‎audio omitted>') {
-            type = 'audio';
-        }
-        else if (msg['content'].trim() === '<‎image omitted>') {
-            type = 'image'
-        }
-        else if (msg['content'].trim() === '<‎video omitted>') {
-            type = 'video'
-        }
+    if (message === '') {
+        return 'text';
+    }
 
+    try {
+        var msg = JSON.parse(message);
+        var type = 'text';
+
+        if (msg['content'] !== '') {
+
+            if (msg['content'].trim() === '<‎audio omitted>') {
+                type = 'audio';
+            }
+            else if (msg['content'].trim() === '<‎image omitted>') {
+                type = 'image'
+            }
+            else if (msg['content'].trim() === '<‎video omitted>') {
+                type = 'video'
+            }
+
+        }
+    }
+
+    catch (e) {
+        return new Error(e);
     }
 
     return type;
 }
 
-module.exports = getMediaType;
+module.exports = new MessageAnalyzer();
