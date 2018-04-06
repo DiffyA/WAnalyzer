@@ -23,15 +23,27 @@ MessageAnalyzer.prototype.getMediaType = function(message) {
             else if (msg['content'].trim() === '<‎video omitted>') {
                 type = 'video'
             }
-
         }
     }
-
     catch (e) {
         return new Error(e);
     }
 
     return type;
-}
+};
+
+
+MessageAnalyzer.prototype.getSender = function(message) {
+
+    try {
+        var msg = JSON.parse(message);
+
+        return msg['sender'];
+    }
+    catch (e) {
+        return new Error(e);
+    }
+
+};
 
 module.exports = new MessageAnalyzer();
