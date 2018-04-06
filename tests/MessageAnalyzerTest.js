@@ -41,7 +41,18 @@ describe('MessageAnalyzer tests', function() {
         assert.equal(msg_sender, '');
 
         done();
-    })
+    });
+
+    it('getDate()', function(done) {
+
+        var msg = '{"date":"2017-07-14T07:50:19+00:00","sender":"Mike","content":"How are you?"}';
+        var msg_date = messageAnalyzer.getDate(msg);
+
+        // Date is formatted to DD-MM-YYYY
+        assert.equal(msg_date, '14-07-2017');
+
+        done();
+    });
 
 
 });

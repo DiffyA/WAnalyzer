@@ -1,5 +1,7 @@
 "use strict";
 
+const moment = require('moment');
+
 function MessageAnalyzer() {}
 
 MessageAnalyzer.prototype.getMediaType = function(message) {
@@ -39,6 +41,20 @@ MessageAnalyzer.prototype.getSender = function(message) {
         var msg = JSON.parse(message);
 
         return msg['sender'];
+    }
+    catch (e) {
+        return new Error(e);
+    }
+
+};
+
+MessageAnalyzer.prototype.getDate = function(message) {
+
+    try {
+        var msg = JSON.parse(message);
+        var date = moment(msg.date).format("DD-MM-YYYY");
+
+        return date;
     }
     catch (e) {
         return new Error(e);
